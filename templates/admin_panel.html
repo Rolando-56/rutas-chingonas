@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Administrador - Rutas Chingonas</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+        th { background: #222; color: #fff; }
+        a { text-decoration: none; color: blue; }
+        .ok { color: green; font-weight: bold; }
+        .pendiente { color: orange; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<h2>📋 Panel Administrador</h2>
+
+<p>
+    <a href="/logout">🚪 Cerrar sesión</a>
+</p>
+
+<table>
+    <tr>
+        <th>Folio</th>
+        <th>Nombre</th>
+        <th>Evento</th>
+        <th>Distancia</th>
+        <th>rama</th>
+        <th>Correo</th>
+        <th>Estado Pago</th>
+        <th>Comprobante</th>
+        <th>Acción</th>
+    </tr>
+
+    {% for c in corredores %}
+    <tr>
+        <td>{{ c.folio }}</td>
+        <td>{{ c.nombre }}</td>
+        <td>{{ c.evento }}</td>
+        <td>{{ c.distancia }}</td>
+        <td>{{ c.rama }}</td>
+        <td>{{ c.correo }}</td>
+        <td class="{{ 'ok' if c.estado_pago=='Pagado' else 'pendiente' }}">
+            {{ c.estado_pago }}
+        </td>
+        <td>
+            {% if c.comprobante %}
+                <a href="/static/comprobantes/{{ c.comprobante }}" target="_blank">
+                    Ver comprobante
+                </a>
+            {% else %}
+                ---
+            {% endif %}
+        </td>
+        <td>
+            {% if c.estado_pago != 'Pagado' %}
+                <a href="/admin/aprobar/{{ c.id }}">✅ Aprobar</a>
+            {% else %}
+                ✔
+            {% endif %}
+            <a href="/admin/eliminar/{{ c.id }}"
+               onclick="return confirm('¿Seguro que deseas eliminar este corredor?')">
+               🗑 Eliminar
+              <a target="_blank"
+href="https://wa.me/52{{ c.telefono }}?text=🏃‍♂️%20TRAIL%20DEL%20GUAJOLOTE%0A%0A📌%20FOLIO:%20{{ c.folio }}%0A%0A👤%20Corredor:%20{{ c.nombre }}%0A🏁%20Distancia:%20{{ c.distancia }}%0A📂%20Categoría:%20{{ c.categoria }}%0A%0A⚠️%20Presenta%20este%20folio%20para%20reclamar%20tu%20kit.%0ARutas%20Chingonas"
+style="margin-left:10px;">
+📲 Enviar folio
+
+            </td>
+
+    </tr>
+
+    {% endfor %}
+</table>
+
+</body>
+</html>

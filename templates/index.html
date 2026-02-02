@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Rutas Chingonas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #6e7175;
+            color: #fff;
+        }
+
+        header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 1200px;
+            background: rgba(18, 19, 39, 0.95);
+            border-radius: 50px;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: #ccc;
+            margin: 0 12px;
+            text-decoration: none;
+        }
+
+        .btn-contacto {
+            background: #222;
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)),
+            url("https://scontent.fjal1-1.fna.fbcdn.net/v/t39.30808-6/618472879_122096345481231536_2854282589333335660_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=106&ccb=1-7&_nc_sid=cc71e4&_nc_eui2=AeG7yJN1qEB7sfwX21Wr2XEtx66xpAVdSWHHrrGkBV1JYadqKb7esQRo2_BCOELlZEF0_YBrwfr1J0XR027QwZG-&_nc_ohc=7i6--RlJ7g0Q7kNvwFXNr8W&_nc_oc=Adk66mjc_QGULz2RbSC5tr2SiuTVQdoSc-umKICgzmGs-LaLtZUn1KcOAxJSP2ei3vsSXiG2839bCLsUjyqERZaA&_nc_zt=23&_nc_ht=scontent.fjal1-1.fna&_nc_gid=0yVtoZvkO3gRVum1TXJOzg&oh=00_AfrEoUHY-ORkHTbwaltcdVRpZcObDX3Wyx7qGrKataPRww&oe=6980BD71")
+            center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            padding: 0 8%;
+        }
+
+        .hero h1 {
+            font-size: 60px;
+        }
+
+        .contador {
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #00ff99;
+            color: #000;
+            padding: 14px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .eventos {
+            padding: 80px 8%;
+        }
+
+        .eventos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .evento {
+            background: #141a22;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .evento img {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+
+        .formulario {
+            max-width: 500px;
+            margin: auto;
+            background: #141a22;
+            padding: 30px;
+            border-radius: 20px;
+        }
+
+        .formulario label {
+            display: block;
+            margin-top: 15px;
+        }
+
+        .formulario input,
+        .formulario select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+        }
+
+        #inscripcion {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <style>
+.navbar{
+   
+    padding:10px 15px;
+    display:float;
+    align-items:center;
+}
+.logo{
+    height:45px;
+}
+</style>
+
+<div class="navbar">
+    <img src="/static/logo.png" class="logo">
+</div>
+    <nav>
+        <a href="#">Inicio</a>
+        <a href="#eventos">Eventos</a>
+    </nav>
+    <a href="#" class="btn-contacto">Contacto</a>
+</header>
+
+<section class="hero">
+    <div>
+        <h1>Trail de las orquideas</h1>
+        <p>Segunda edición · Coatepec, Ver.</p>
+        <p>17 de Mayo 2026</p>
+        <div class="contador">
+            ⏱ Faltan <span class="dias" data-fecha="2026-05-17"></span> días
+        </div>
+        <a class="btn" onclick="mostrarFormulario('Trail de las orquideas')">
+            Inscribirme
+        </a>
+    </div>
+</section>
+
+<section class="eventos" id="eventos">
+    <h2 style="text-align:center;margin-bottom:40px;">Próximos eventos</h2>
+
+    <div class="eventos-grid">
+
+        <div class="evento">
+            <img src="https://recursos.saludsa.com/hs-fs/hubfs/Imported_Blog_Media/shutterstock_387005833%20(1).jpg">
+            <h3>Trail del Guajolote</h3>
+            <p>Coatepec, Ver.</p>
+            <p>Diciembre 2026</p>
+            <p class="contador">⏱ <span class="dias" data-fecha="2026-12-21"></span> días</p>
+           <a class="btn" onclick="/*mostrarFormulario*/('Trail del Guajolote')">Inscribirme</a> 
+                  <!-- ========= BOTÓN INFO DEL EVENTO ========= -->
+<style>
+.btn-info-evento {
+    background: linear-gradient(135deg,#ff7a18,#ffb347);
+    border: auto;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-info-evento:hover {
+    opacity: 0.9;
+}
+
+/* Modal */
+.modal-evento {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+}
+
+.modal-contenido {
+    background: #753f3f;
+    margin: 10% auto;
+    padding: 25px;
+    border-radius: 20px;
+    max-width: 450px;
+    position: sticky;
+}
+
+.cerrar {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.modal-contenido h3 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+</style>
+
+<button class="btn-info-evento" onclick="abrirInfo()">
+    ℹ️ Info del evento
+</button>
+
+<div id="infoEvento" class="modal-evento">
+    <div class="modal-contenido">
+        <span class="cerrar" onclick="cerrarInfo()">✖</span>
+
+        <h3>🏃 Trail del Guajolote</h3>
+
+        <p><strong>📍 Lugar:</strong> Coatepec, Veracruz</p>
+        <p><strong>📅 Fecha:</strong> </p>
+        <p><strong>🕕 Hora:</strong> 7:00 AM</p>
+        <p><strong>📏 Distancias:</strong> 6 km, 14 km e Infantiles</p>
+        <p><strong>💲Costo:</strong> </p>
+        <p><strong>🎽 Categorías:</strong> Libre, Máster, Veteranos, Veteranos Plus, Infantiles</p>
+        <p><strong>💧 Incluye:</strong> Hidratación, medalla, Playera, Bienvenida</p>
+        <p><strong>⚠️ Recomendaciones:</strong> Llevar lámpara y hidratación</p>
+    </div>
+</div>
+
+<script>
+function abrirInfo() {
+    document.getElementById("infoEvento").style.display = "block";
+}
+
+function cerrarInfo() {
+    document.getElementById("infoEvento").style.display = "none";
+}
+</script>
+<!-- ======================================== -->
+            <!-- ========== ICONOS REALES REDES SOCIALES ========== -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+.redes-evento {
+    margin-top: 20px;
+    padding: 18px;
+    border-radius: 15px;
+    background: #f8f9fa;
+    max-width: 380px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.redes-evento h4 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #222;
+}
+
+.redes-evento a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+}
+
+/* Colores por red */
+.facebook { background: #1877f2; }
+.instagram {
+    background: linear-gradient(45deg,#f58529,#dd2a7b,#8134af,#515bd4);
+}
+.whatsapp { background: #25d366; color:#000; }
+
+.redes-evento a:hover {
+    opacity: 0.9;
+    transform: scale(1.03);
+}
+</style>
+
+<div class="redes-evento">
+    <h4>📢 Síguenos</h4>
+
+    <a class="facebook"
+       href="https://www.facebook.com/profile.php?id=61586946090247"
+       target="_blank">
+        <i class="fa-brands fa-facebook-f"></i> Facebook
+    </a>
+
+    <a class="instagram"
+       href="https://www.instagram.com/traildelasorquideas2026?igsh=MWdsZjRobWNlZ3V6bg%3D%3D&utm"
+       target="_blank">
+        <i class="fa-brands fa-instagram"></i> Instagram
+    </a>
+
+    <a class="whatsapp"
+       href="https://wa.me/522283397804?text=Hola%20quiero%20informes%20del%20Trail%20del%20Orquídeas"
+       target="_blank">
+        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+    </a>
+</div>
+<!-- ================================================ -->
+        </div>
+
+         <div class="evento">
+            <img src="https://scontent.fjal1-1.fna.fbcdn.net/v/t39.30808-6/618472879_122096345481231536_2854282589333335660_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=106&ccb=1-7&_nc_sid=cc71e4&_nc_eui2=AeG7yJN1qEB7sfwX21Wr2XEtx66xpAVdSWHHrrGkBV1JYadqKb7esQRo2_BCOELlZEF0_YBrwfr1J0XR027QwZG-&_nc_ohc=7i6--RlJ7g0Q7kNvwFXNr8W&_nc_oc=Adk66mjc_QGULz2RbSC5tr2SiuTVQdoSc-umKICgzmGs-LaLtZUn1KcOAxJSP2ei3vsSXiG2839bCLsUjyqERZaA&_nc_zt=23&_nc_ht=scontent.fjal1-1.fna&_nc_gid=0yVtoZvkO3gRVum1TXJOzg&oh=00_AfrEoUHY-ORkHTbwaltcdVRpZcObDX3Wyx7qGrKataPRww&oe=6980BD71">
+            <h3>Trail de la orquideas</h3>
+            <p>Coatepec, Ver.</p>
+            <p>17 de Mayo 2026</p>
+            <p class="contador">⏱ <span class="dias" data-fecha="2026-05-17"></span> días</p>
+            <a class="btn" onclick="mostrarFormulario('Trail de las orquideas')">Inscribirme</a>
+            <!-- ========= BOTÓN INFO DEL EVENTO ========= -->
+<style>
+.btn-info-evento {
+    background: linear-gradient(135deg,#ff7a18,#ffb347);
+    border: auto;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-info-evento:hover {
+    opacity: 0.9;
+}
+
+/* Modal */
+.modal-evento {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+}
+
+.modal-contenido {
+    background: #753f3f;
+    margin: 10% auto;
+    padding: 25px;
+    border-radius: 20px;
+    max-width: 450px;
+    position: sticky;
+}
+
+.cerrar {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.modal-contenido h3 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+</style>
+
+<button class="btn-info-evento" onclick="abrirInfo()">
+    ℹ️ Info del evento
+</button>
+
+<div id="infoEvento" class="modal-evento">
+    <div class="modal-contenido">
+        <span class="cerrar" onclick="cerrarInfo()">✖</span>
+
+        <h3>🏃 Trail de las Orquídeas</h3>
+
+        <p><strong>📍 Lugar:</strong> Coatepec, Veracruz</p>
+        <p><strong>📅 Fecha:</strong> 17 de Mayo 2026</p>
+        <p><strong>🕕 Hora:</strong> 7:00 AM</p>
+        <p><strong>📏 Distancias:</strong> 6 km, 14 km e Infantiles</p>
+        <p><strong>💲Costo:</strong> 6km 350, 14km 400 e Infantil 270</p>
+        <p><strong>🎽 Categorías:</strong> Libre, Máster, Veteranos, Veteranos Plus, Infantiles</p>
+        <p><strong>💧 Incluye:</strong> Hidratación, medalla, Playera, Bienvenida</p>
+        <p><strong>⚠️ Recomendaciones:</strong> Llevar lámpara y hidratación</p>
+    </div>
+</div>
+
+<script>
+function abrirInfo() {
+    document.getElementById("infoEvento").style.display = "block";
+}
+
+function cerrarInfo() {
+    document.getElementById("infoEvento").style.display = "none";
+}
+</script>
+<!-- ======================================== -->
+
+            <!-- ========== ICONOS REALES REDES SOCIALES ========== -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+.redes-evento {
+    margin-top: 20px;
+    padding: 18px;
+    border-radius: 15px;
+    background: #f8f9fa;
+    max-width: 380px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.redes-evento h4 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #222;
+}
+
+.redes-evento a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+}
+
+/* Colores por red */
+.facebook { background: #1877f2; }
+.instagram {
+    background: linear-gradient(45deg,#f58529,#dd2a7b,#8134af,#515bd4);
+}
+.whatsapp { background: #25d366; color:#000; }
+
+.redes-evento a:hover {
+    opacity: 0.9;
+    transform: scale(1.03);
+}
+</style>
+
+<div class="redes-evento">
+    <h4>📢 Síguenos</h4>
+
+    <a class="facebook"
+       href="https://www.facebook.com/profile.php?id=61586946090247"
+       target="_blank">
+        <i class="fa-brands fa-facebook-f"></i> Facebook
+    </a>
+
+    <a class="instagram"
+       href="https://www.instagram.com/traildelasorquideas2026?igsh=MWdsZjRobWNlZ3V6bg%3D%3D&utm"
+       target="_blank">
+        <i class="fa-brands fa-instagram"></i> Instagram
+    </a>
+
+    <a class="whatsapp"
+       href="https://wa.me/522283397804?text=Hola%20quiero%20informes%20del%20Trail%20de%20las%20Orquídeas"
+       target="_blank">
+        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+    </a>
+</div>
+<!-- ================================================ -->
+        </div>
+
+
+        <div class="evento">
+            <img src="https://spirobicycles.com/cdn/shop/files/jpeg-optimizer_bicicleta_mtb_outdoor_-32.jpg">
+            <h3>Coalt Bike</h3>
+            <p>Coatepec, Ver.</p>
+            <p>PROXIMAMENTE</p>
+            <p class="contador">⏱ <span class="dias" data-fecha="2026-04-15"></span> días</p>
+            <a class="btn" onclick="/*mostrarFormulario*/('Coalt Bike')">Inscribirme</a>
+        
+          <!-- ========= BOTÓN INFO DEL EVENTO ========= -->
+<style>
+.btn-info-evento {
+    background: linear-gradient(135deg,#ff7a18,#ffb347);
+    border: auto;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-info-evento:hover {
+    opacity: 0.9;
+}
+
+/* Modal */
+.modal-evento {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+}
+
+.modal-contenido {
+    background: #753f3f;
+    margin: 10% auto;
+    padding: 25px;
+    border-radius: 20px;
+    max-width: 450px;
+    position: sticky;
+}
+
+.cerrar {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.modal-contenido h3 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+</style>
+
+<button class="btn-info-evento" onclick="abrirInfo()">
+    ℹ️ Info del evento
+</button>
+
+<div id="infoEvento" class="modal-evento">
+    <div class="modal-contenido">
+        <span class="cerrar" onclick="cerrarInfo()">✖</span>
+
+        <h3>🏃 Trail de las Orquídeas</h3>
+
+        <p><strong>📍 Lugar:</strong> Coatepec, Veracruz</p>
+        <p><strong>📅 Fecha:</strong> 17 de Mayo 2026</p>
+        <p><strong>🕕 Hora:</strong> 7:00 AM</p>
+        <p><strong>📏 Distancias:</strong> 6 km, 14 km e Infantiles</p>
+        <p><strong>💲Costo:</strong> 6km 350, 14km 400 e Infantil 270</p>
+        <p><strong>🎽 Categorías:</strong> Libre, Máster, Veteranos, Veteranos Plus, Infantiles</p>
+        <p><strong>💧 Incluye:</strong> Hidratación, medalla, Playera, Bienvenida</p>
+        <p><strong>⚠️ Recomendaciones:</strong> Llevar lámpara y hidratación</p>
+    </div>
+</div>
+
+<script>
+function abrirInfo() {
+    document.getElementById("infoEvento").style.display = "block";
+}
+
+function cerrarInfo() {
+    document.getElementById("infoEvento").style.display = "none";
+}
+</script>
+<!-- ======================================== -->
+
+            <!-- ========== ICONOS REALES REDES SOCIALES ========== -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+.redes-evento {
+    margin-top: 20px;
+    padding: 18px;
+    border-radius: 15px;
+    background: #f8f9fa;
+    max-width: 380px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.redes-evento h4 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #222;
+}
+
+.redes-evento a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+}
+
+/* Colores por red */
+.facebook { background: #1877f2; }
+.instagram {
+    background: linear-gradient(45deg,#f58529,#dd2a7b,#8134af,#515bd4);
+}
+.whatsapp { background: #25d366; color:#000; }
+
+.redes-evento a:hover {
+    opacity: 0.9;
+    transform: scale(1.03);
+}
+</style>
+
+<div class="redes-evento">
+    <h4>📢 Síguenos</h4>
+
+    <a class="facebook"
+       href="https://www.facebook.com/profile.php?id=61586946090247"
+       target="_blank">
+        <i class="fa-brands fa-facebook-f"></i> Facebook
+    </a>
+
+    <a class="instagram"
+       href="https://www.instagram.com/traildelasorquideas2026?igsh=MWdsZjRobWNlZ3V6bg%3D%3D&utm"
+       target="_blank">
+        <i class="fa-brands fa-instagram"></i> Instagram
+    </a>
+
+    <a class="whatsapp"
+       href="https://wa.me/522283397804?text=Hola%20quiero%20informes%20del%20Trail%20de%20las%20Orquídeas"
+       target="_blank">
+        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+    </a>
+</div>
+<!-- ================================================ -->
+    </div>
+</section>
+
+<section class="eventos" id="inscripcion">
+<h2 style="text-align:center;margin-bottom:30px;">Formulario de inscripción</h2>
+
+<form class="formulario" action="/registrar" method="POST">
+
+    <label>Evento</label>
+    <input type="text" id="eventoSeleccionado" name="evento" readonly required>
+
+    <label>Distancia</label>
+    <select name="distancia" id="distancia" required>
+        <option value="">Selecciona</option>
+    </select>
+
+    <label>Nombre completo</label>
+    <input type="text" name="nombre" required>
+
+    <label>Edad</label>
+    <input type="number" name="edad" required>
+
+    <label>Correo</label>
+    <input type="email" name="correo" required>
+
+    <label>Teléfono</label>
+    <input type="tel" name="telefono" required>
+
+    <label>Categoría</label>
+    <select name="categoria" required>
+        <option>Libre</option>
+        <option>Master</option>
+        <option>Veteranos</option>
+        <option>Veteranos Plus</option>
+         <option>Infantil</option>
+    </select>
+
+    <label>rama</label>
+    <select name="rama" required>
+        <option>Varonil</option>
+        <option>Femenil</option>
+    </select>
+
+    <label>Playera</label>
+    <select name="playera" required>
+        <option>Infantil</option>
+        <option>Chica</option>
+        <option>Mediana</option>
+        <option>Grande</option>
+        <option>Extra Grande</option>
+    </select>
+
+    <label>Fecha y hora de registro</label>
+    <input type="text" id="fechaRegistro" readonly>
+
+    <button class="btn" type="submit">Confirmar inscripción</button>
+</form>
+</section>
+
+<script>
+function actualizarContadores() {
+    document.querySelectorAll(".dias").forEach(span => {
+        const fechaEvento = new Date(span.dataset.fecha);
+        const hoy = new Date();
+        const diferencia = fechaEvento - hoy;
+        const dias = Math.ceil(diferencia / (1000 * 60 * 60 * 24));
+        span.innerText = dias > 0 ? dias : "0";
+    });
+}
+actualizarContadores();
+
+const distanciasPorEvento = {
+    "Trail del Guajolote": ["8 KM", "18 KM"],
+    "Coalt Bike": ["20 KM", "42 KM"],
+     "Trail de las orquideas": ["14 KM", "6 KM" , "Infantil"]
+};
+
+function mostrarFormulario(evento) {
+    document.getElementById("inscripcion").style.display = "block";
+    document.getElementById("eventoSeleccionado").value = evento;
+    document.getElementById("inscripcion").scrollIntoView({ behavior: "smooth" });
+
+    const selectDistancia = document.getElementById("distancia");
+    selectDistancia.innerHTML = '<option value="">Selecciona</option>';
+
+    distanciasPorEvento[evento].forEach(d => {
+        const option = document.createElement("option");
+        option.value = d;
+        option.textContent = d;
+        selectDistancia.appendChild(option);
+    });
+
+    document.getElementById("fechaRegistro").value = new Date().toLocaleString();
+}
+</script>
+
+</body>
+</html>
