@@ -29,7 +29,7 @@
         <th>Distancia</th>
         <th>rama</th>
         <th>Correo</th>
-        <th>Estado Pago</th>
+        <th>estatus</th>
         <th>Comprobante</th>
         <th>Acción</th>
     </tr>
@@ -43,7 +43,7 @@
         <td>{{ c.rama }}</td>
         <td>{{ c.correo }}</td>
         <td class="{{ 'ok' if c.estado_pago=='Pagado' else 'pendiente' }}">
-            {{ c.estado_pago }}
+            {{ c.estatus }}
         </td>
         <td>
             {% if c.comprobante %}

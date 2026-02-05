@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, url_for
 import mysql.connector
 import os
 
@@ -6,7 +6,7 @@ import os
 # CONFIGURACIÓN GENERAL
 # =========================
 app = Flask(__name__)
-app.secret_key = "clave_secreta_123"
+app.secret_key = os.environ.get("SECRET_KEY")
 
 UPLOAD_FOLDER = "static/comprobantes"
 PDF_FOLDER = "static/pdfs"
@@ -19,13 +19,13 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 # =========================
 # CONEXIÓN BASE DE DATOS (REMOTA)
 # =========================
-def conectar_db():
+def get_connection():
     return mysql.connector.connect(
-        host="sql10.freesqldatabase.com",
-        user="sql10816136",
-        password="xXF34b6Xnd",
-        database="sql10816136",
-        port=3306
+        host=os.environ.get("DB_HOST"),
+        user=os.environ.get("DB_USER"),
+        password=os.environ.get("DB_PASSWORD"),
+        database=os.environ.get("DB_NAME"),
+        port=os.environ.get("DB_PORT", 3306)
     )
 
 # =========================
@@ -42,8 +42,18 @@ def inicio():
 def registrar():
     datos = request.form
 
+    evento = datos["evento"]
+    distancia = datos["distancia"]
+    nombre = datos["nombre"]
+    edad = datos["edad"]
+    correo = datos["correo"]
+    telefono = datos["telefono"]
+    categoria = datos["categoria"]
+    rama = datos["rama"]
+    playera = datos["playera"]  # ✅ ESTA LÍNEA FALTABA
+
     try:
-        conexion = conectar_db()
+        conexion = get_connection()
         cursor = conexion.cursor()
 
         cursor.execute("""
@@ -51,15 +61,15 @@ def registrar():
             (evento, distancia, nombre, edad, correo, telefono, categoria, rama, playera, fecha_registro)
             VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,NOW())
         """, (
-            datos["evento"],
-            datos["distancia"],
-            datos["nombre"],
-            datos["edad"],
-            datos["correo"],
-            datos["telefono"],
-            datos["categoria"],
-            datos["rama"],
-            datos["playera"]
+            evento,
+            distancia,
+            nombre,
+            edad,
+            correo,
+            telefono,
+            categoria,
+            rama,
+            playera
         ))
 
         conexion.commit()
@@ -102,7 +112,7 @@ def login():
     if request.method == "POST":
         folio = request.form["folio"]
 
-        conexion = conectar_db()
+        conexion = get_connection()
         cursor = conexion.cursor(dictionary=True)
 
         cursor.execute("SELECT * FROM corredores WHERE folio=%s", (folio,))
@@ -130,7 +140,7 @@ def subir_comprobante():
     ruta = os.path.join(app.config["UPLOAD_FOLDER"], nombre_archivo)
     archivo.save(ruta)
 
-    conexion = conectar_db()
+    conexion = get_connection()
     cursor = conexion.cursor()
 
     cursor.execute("""
@@ -190,7 +200,7 @@ def admin_panel():
     if not session.get("admin"):
         return redirect("/admin")
 
-    conexion = conectar_db()
+    conexion = get_connection()
     cursor = conexion.cursor(dictionary=True)
 
     cursor.execute("SELECT * FROM corredores")
@@ -209,7 +219,7 @@ def aprobar_pago(id):
     if not session.get("admin"):
         return redirect("/admin")
 
-    conexion = conectar_db()
+    conexion = get_connection()
     cursor = conexion.cursor()
 
     cursor.execute(
@@ -220,6 +230,19 @@ def aprobar_pago(id):
 
     cursor.close()
     conexion.close()
+
+    return redirect("/admin/panel")
+
+@app.route('/admin/eliminar/<int:id>')
+def eliminar(id):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("DELETE FROM corredores WHERE id = %s", (id,))
+    conn.commit()
+
+    cursor.close()
+    conn.close()
 
     return redirect("/admin/panel")
 
@@ -249,12 +272,13 @@ def generar_pdf(corredor):
 
     return ruta
 
+
 # =========================
 # ENVIAR FOLIO POR WHATSAPP
 # =========================
 @app.route('/admin/enviar_folio/<int:id>')
 def enviar_folio(id):
-    conexion = conectar_db()
+    conexion = get_connection()
     cursor = conexion.cursor(dictionary=True)
 
     cursor.execute("SELECT * FROM corredores WHERE id=%s", (id,))
