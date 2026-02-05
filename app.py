@@ -94,6 +94,9 @@ def registrar():
         <b>Banco:</b> BBVA<br>
         <b>Nombre:</b> Rolando Sanchez Silvano<br>
         <b>CLABE:</b> 4152314390290222<br>
+        <b>COSTO:</b> 14km>$400 6km>$350<br>
+        <b>INFANTIL C/P:</b> $270<br>
+        <b>INFANTIL S/P:</b> $170<br>
         <b>Concepto:</b> Inscripción {folio}
         </p>
 
