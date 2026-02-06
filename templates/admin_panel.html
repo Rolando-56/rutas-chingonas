@@ -46,10 +46,11 @@
             {{ c.estatus }}
         </td>
         <td>
+        {% if c.comprobante %}
             <a href="{{ url_for('static', filename='comprobantes/' + c.comprobante) }}" target="_blank">
     Ver comprobante
-        </a>
-
+</a>
+            
             {% else %}
                 ---
             {% endif %}
