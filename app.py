@@ -1,12 +1,20 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 import mysql.connector
 import os
+import cloudinary
+import cloudinary.uploader
 
 # =========================
 # CONFIGURACIÓN GENERAL
 # =========================
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY")
+
+cloudinary.config(
+    cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.environ.get("CLOUDINARY_API_KEY"),
+    api_secret=os.environ.get("CLOUDINARY_API_SECRET")
+)
 
 UPLOAD_FOLDER = "static/comprobantes"
 PDF_FOLDER = "static/pdfs"
@@ -139,9 +147,13 @@ def subir_comprobante():
     folio = request.form["folio"]
     archivo = request.files["comprobante"]
 
-    nombre_archivo = f"{folio}_{archivo.filename}"
-    ruta = os.path.join(app.config["UPLOAD_FOLDER"], nombre_archivo)
-    archivo.save(ruta)
+    # Subir a Cloudinary
+    resultado = cloudinary.uploader.upload(
+        archivo,
+        folder="comprobantes_rutas_chingonas"
+    )
+
+    url_comprobante = resultado["secure_url"]
 
     conexion = get_connection()
     cursor = conexion.cursor()
@@ -150,25 +162,27 @@ def subir_comprobante():
         UPDATE corredores
         SET comprobante=%s, estatus='Pendiente'
         WHERE folio=%s
-    """, (nombre_archivo, folio))
+    """, (url_comprobante, folio))
 
     conexion.commit()
     cursor.close()
     conexion.close()
 
     return """
-    <h2>✅ Comprobante enviado</h2>
-    <p>En revisión</p>
+    <h2>✅ Comprobante enviado correctamente</h2>
+    <p>Tu pago será revisado por el administrador.</p>
+
+    <br>
 
     <a href="/" style="
         display:inline-block;
-        margin-top:20px;
         padding:12px 22px;
         background:#28a745;
         color:white;
         text-decoration:none;
         border-radius:8px;
         font-weight:bold;
+        font-size:16px;
     ">
         ⬅️ Regresar a la página principal
     </a>

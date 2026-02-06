@@ -47,7 +47,7 @@
         </td>
         <td>
         {% if c.comprobante %}
-            <a href="{{ url_for('static', filename='comprobantes/' + c.comprobante) }}" target="_blank">
+            <a href="{{ c.comprobante}}" target="_blank">
     Ver comprobante
 </a>
             
@@ -65,7 +65,7 @@
                onclick="return confirm('¿Seguro que deseas eliminar este corredor?')">
                🗑 Eliminar
               <a target="_blank"
-href="https://wa.me/52{{ c.telefono }}?text=🏃‍♂️%20TRAIL%20DEL%20GUAJOLOTE%0A%0A📌%20FOLIO:%20{{ c.folio }}%0A%0A👤%20Corredor:%20{{ c.nombre }}%0A🏁%20Distancia:%20{{ c.distancia }}%0A📂%20Categoría:%20{{ c.categoria }}%0A%0A⚠️%20Presenta%20este%20folio%20para%20reclamar%20tu%20kit.%0ARutas%20Chingonas"
+href="https://wa.me/52{{ c.telefono }}?text=🏃‍♂️%20TRAIL%20DE%20LA%ORQUIDEA%0A%0A📌%20FOLIO:%20{{ c.folio }}%0A%0A👤%20Corredor:%20{{ c.nombre }}%0A🏁%20Distancia:%20{{ c.distancia }}%0A📂%20Categoría:%20{{ c.categoria }}%0A%0A⚠️%20Presenta%20este%20folio%20para%20reclamar%20tu%20kit.%0ARutas%20Chingonas"
 style="margin-left:10px;">
 📲 Enviar folio
 
